@@ -14,20 +14,25 @@ function login() {
     })
     .then(response => {
         if (response.ok) {
-            document.getElementById('loginContainer').style.display = 'none';
-            document.getElementById('homeScreen').style.display = 'block';
-            document.getElementById('loggedInUser').textContent = username;
-            document.getElementById('loggedInUserHeader').textContent = `Logged in as ${username}`;
-            fetchCityList();
-            // Store login state in local storage
-            localStorage.setItem('loggedIn', 'true');
-            localStorage.setItem('username', username);
+            return response.json(); // Return the response data
         } else {
-            document.getElementById('loginError').textContent = 'Invalid username or password';
-            document.getElementById('loginError').classList.remove('hidden');
+            throw new Error('Invalid username or password');
         }
     })
-    .catch(error => console.error('Error logging in:', error));
+    .then(data => {
+        // Update UI and store login state in local storage
+        document.getElementById('loginContainer').style.display = 'none';
+        document.getElementById('homeScreen').style.display = 'block';
+        document.getElementById('loggedInUser').textContent = username;
+        document.getElementById('loggedInUserHeader').textContent = `Logged in as ${username}`;
+        localStorage.setItem('loggedIn', 'true');
+        localStorage.setItem('username', username);
+        fetchCityList(); // Fetch city list after successful login
+    })
+    .catch(error => {
+        document.getElementById('loginError').textContent = error.message;
+        document.getElementById('loginError').classList.remove('hidden');
+    });
 }
 
 // Function to handle user logout
@@ -35,28 +40,16 @@ function logout() {
     fetch('http://127.0.0.1:5000/logout')
     .then(response => {
         if (response.ok) {
+            // Update UI and clear login state from local storage
             document.getElementById('loginContainer').style.display = 'block';
             document.getElementById('homeScreen').style.display = 'none';
-            // Clear login state from local storage
             localStorage.removeItem('loggedIn');
             localStorage.removeItem('username');
         } else {
-            alert('Error logging out');
+            throw new Error('Error logging out');
         }
     })
-    .catch(error => console.error('Error logging out:', error));
-}
-
-// Function to toggle between screens
-function toggleScreen(screenId) {
-    const screens = document.querySelectorAll('.screen');
-    screens.forEach(screen => {
-        if (screen.id === screenId) {
-            screen.classList.remove('hidden');
-        } else {
-            screen.classList.add('hidden');
-        }
-    });
+    .catch(error => alert(error.message));
 }
 
 // Function to fetch city list from backend API
@@ -70,10 +63,16 @@ function fetchCityList() {
             data.forEach(city => {
                 const cityDiv = document.createElement('div');
                 cityDiv.classList.add('cityItem');
-                cityDiv.innerHTML = `<p>${capitalizeFirstLetter(city.name)}</p>
+                cityDiv.innerHTML = `<p class="cityName">${capitalizeFirstLetter(city.name)}</p>
                                      <p>Temperature: ${city.temperature}°C ${getTemperatureIcon(city.temperature)}</p>
                                      <p>Humidity: ${city.humidity}%</p>
                                      <button class="deleteBtn" onclick="deleteCity('${city.name}')">Delete</button>`;
+
+                // Attach onclick event to the whole city division
+                cityDiv.onclick = function() {
+                    showCityDetails(city.name);
+                };
+                
                 cityListDiv.appendChild(cityDiv);
             });
         })
@@ -109,13 +108,17 @@ function addCity(cityName) {
         if (response.ok) {
             return response.json(); // Return the response data
         } else {
-            throw new Error('Error adding city');
+            return response.json().then(data => {
+                throw new Error(data.error); // Throw an error with the error message from the response
+            });
         }
     })
     .then(data => {
         fetchCityList(); // Fetch city list after successfully adding the city
     })
-    .catch(error => console.error('Error adding city:', error));
+    .catch(error => {
+        alert(error.message); // Display the error message to the user
+    });
 }
 
 // Function to delete a city
@@ -145,19 +148,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const username = localStorage.getItem('username');
 
     if (loggedIn === 'true' && username) {
+        // Update UI and fetch city list if user is logged in
         document.getElementById('loggedInUser').textContent = username;
         document.getElementById('loggedInUserHeader').textContent = `Logged in as ${username}`;
         fetchCityList();
-        toggleScreen('homeScreen');
+        document.getElementById('loginContainer').style.display = 'none';
+        document.getElementById('homeScreen').style.display = 'block';
     } else {
-        toggleScreen('loginContainer');
+        // Show login form if user is not logged in
+        document.getElementById('loginContainer').style.display = 'block';
+        document.getElementById('homeScreen').style.display = 'none';
     }
 });
 
 // Initialize Add City button
-document.getElementById('addCityBtn').addEventListener('click', function() {
+document.getElementById('addCityBtn').addEventListener('click', () => {
     const cityName = prompt('Enter the name of the city:');
     if (cityName) {
         addCity(cityName);
     }
 });
+
+// Function to show city details popup
+function showCityDetails(cityName) {
+    fetch(`http://127.0.0.1:5000/cities/${cityName}`)
+        .then(response => response.json())
+        .then(data => {
+            const cityNameElem = document.getElementById('cityName');
+            const cityTemperatureElem = document.getElementById('cityTemperature');
+            const cityHumidityElem = document.getElementById('cityHumidity');
+
+            cityNameElem.textContent = data.name;
+            cityTemperatureElem.textContent = data.temperature;
+            cityHumidityElem.textContent = data.humidity;
+
+            // Show popup
+            document.getElementById('cityDetailsPopup').classList.remove('hidden');
+
+            // TODO: Fetch and display weather charts
+            // For now, just log the data
+            console.log(data);
+        })
+        .catch(error => console.error('Error fetching city details:', error));
+}
+
+// Function to delete city details popup
+function deleteCityDetails() {
+    document.getElementById('cityDetailsPopup').classList.add('hidden');
+}

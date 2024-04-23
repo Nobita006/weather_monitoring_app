@@ -40,7 +40,16 @@
     </div>
 
     <div id="cityDetailsPopup" class="hidden">
-        <!-- City details will be displayed here -->
+        <div id="cityDetailsContent">
+            <h2 id="cityName"></h2>
+            <p>Temperature: <span id="cityTemperature"></span>°C</p>
+            <p>Humidity: <span id="cityHumidity"></span>%</p>
+            <button id="deleteCityBtn" onclick="deleteCityDetails()">Delete</button>
+            <div id="weatherCharts">
+                <canvas id="temperatureChart"></canvas>
+                <canvas id="humidityChart"></canvas>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>

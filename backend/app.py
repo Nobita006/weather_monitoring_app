@@ -116,6 +116,19 @@ def delete_city(city_name):
         return jsonify({'message': 'City deleted successfully'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+# Route to fetch details of a specific city
+@app.route('/cities/<city_name>')
+def city_details(city_name):
+    city = get_city_by_name(city_name)
+    if city:
+        return jsonify({
+            'name': city['name'],
+            'temperature': city['temperature'],
+            'humidity': city['humidity']
+        })
+    else:
+        return jsonify({'error': 'City not found'}), 404
 
 if __name__ == '__main__':
     app.run(debug=True)
