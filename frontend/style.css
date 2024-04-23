@@ -1,4 +1,31 @@
+
+#loginContainer {
+    text-align: center;
+}
+
 /* Hide the home screen initially */
 #homeScreen {
     display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.cityItem {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.deleteBtn {
+    background-color: #ff6347;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.deleteBtn:hover {
+    background-color: #cc4c39;
 }

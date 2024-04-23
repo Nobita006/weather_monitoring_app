@@ -7,23 +7,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>User Authentication</h1>
-    <div id="loginForm">
-        <h2>Login</h2>
-        <form id="loginForm">
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username"><br>
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password"><br><br>
-            <button type="button" onclick="login()">Login</button>
-        </form>
+    <div id="loginContainer">
+        <h1>User Authentication</h1>
+        <div id="loginForm">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="username">Username:</label><br>
+                <input type="text" id="username" name="username"><br>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password"><br><br>
+                <button type="button" onclick="login()">Login</button>
+            </form>
+            <p id="loginError" class="hidden"></p>
+        </div>
+
+        <div id="logoutForm" class="hidden">
+            <h2>Welcome, <span id="loggedInUser"></span>!</h2>
+            <button onclick="logout()">Logout</button>
+        </div>
     </div>
 
-    <div id="logoutForm" style="display: none;">
-        <h2>Welcome, <span id="loggedInUser"></span>!</h2>
-        <button onclick="logout()">Logout</button>
-    </div>
-    
     <div id="homeScreen" class="hidden">
         <h1>Welcome to Weather Monitoring App</h1>
         <div id="cityList">
@@ -32,7 +35,7 @@
         <button id="addCityBtn">Add City</button>
     </div>
 
-    <div id="cityDetails" class="hidden">
+    <div id="cityDetailsPopup" class="hidden">
         <!-- City details will be displayed here -->
     </div>
 
