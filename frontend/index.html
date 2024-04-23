@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Monitoring App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>User Authentication</h1>
+    <div id="loginForm">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username"><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password"><br><br>
+            <button type="button" onclick="login()">Login</button>
+        </form>
+    </div>
+
+    <div id="logoutForm" style="display: none;">
+        <h2>Welcome, <span id="loggedInUser"></span>!</h2>
+        <button onclick="logout()">Logout</button>
+    </div>
+    
+    <div id="homeScreen" class="hidden">
+        <h1>Welcome to Weather Monitoring App</h1>
+        <div id="cityList">
+            <!-- City list will be displayed here -->
+        </div>
+        <button id="addCityBtn">Add City</button>
+    </div>
+
+    <div id="cityDetails" class="hidden">
+        <!-- City details will be displayed here -->
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

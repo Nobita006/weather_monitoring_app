@@ -1,0 +1,4 @@
+/* Hide the home screen initially */
+#homeScreen {
+    display: none;
+}
