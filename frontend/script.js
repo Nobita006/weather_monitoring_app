@@ -17,7 +17,11 @@ function login() {
             document.getElementById('loginContainer').style.display = 'none';
             document.getElementById('homeScreen').style.display = 'block';
             document.getElementById('loggedInUser').textContent = username;
+            document.getElementById('loggedInUserHeader').textContent = `Logged in as ${username}`;
             fetchCityList();
+            // Store login state in local storage
+            localStorage.setItem('loggedIn', 'true');
+            localStorage.setItem('username', username);
         } else {
             document.getElementById('loginError').textContent = 'Invalid username or password';
             document.getElementById('loginError').classList.remove('hidden');
@@ -33,6 +37,9 @@ function logout() {
         if (response.ok) {
             document.getElementById('loginContainer').style.display = 'block';
             document.getElementById('homeScreen').style.display = 'none';
+            // Clear login state from local storage
+            localStorage.removeItem('loggedIn');
+            localStorage.removeItem('username');
         } else {
             alert('Error logging out');
         }
@@ -63,14 +70,30 @@ function fetchCityList() {
             data.forEach(city => {
                 const cityDiv = document.createElement('div');
                 cityDiv.classList.add('cityItem');
-                cityDiv.innerHTML = `<p>${city.name}</p>
-                                     <p>Temperature: ${city.temperature}°C</p>
+                cityDiv.innerHTML = `<p>${capitalizeFirstLetter(city.name)}</p>
+                                     <p>Temperature: ${city.temperature}°C ${getTemperatureIcon(city.temperature)}</p>
                                      <p>Humidity: ${city.humidity}%</p>
                                      <button class="deleteBtn" onclick="deleteCity('${city.name}')">Delete</button>`;
                 cityListDiv.appendChild(cityDiv);
             });
         })
         .catch(error => console.error('Error fetching city list:', error));
+}
+
+// Function to capitalize the first letter of a string
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
+
+// Function to get temperature icon based on temperature value
+function getTemperatureIcon(temperature) {
+    if (temperature > 40) {
+        return '<img src="images\\redTherm.png" alt="Hot">';
+    } else if (temperature > 28) {
+        return '<img src="images\\blackTherm.png" alt="Normal">';
+    } else {
+        return '<img src="images\\greenTherm.png" alt="Pleasant">';
+    }
 }
 
 // Function to add a city
@@ -80,14 +103,17 @@ function addCity(cityName) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name: cityName })
+        body: JSON.stringify({ name: capitalizeFirstLetter(cityName) })
     })
     .then(response => {
         if (response.ok) {
-            fetchCityList();
+            return response.json(); // Return the response data
         } else {
-            alert('Error adding city');
+            throw new Error('Error adding city');
         }
+    })
+    .then(data => {
+        fetchCityList(); // Fetch city list after successfully adding the city
     })
     .catch(error => console.error('Error adding city:', error));
 }
@@ -100,19 +126,32 @@ function deleteCity(cityName) {
         })
         .then(response => {
             if (response.ok) {
-                fetchCityList();
+                return response.json(); // Return the response data
             } else {
-                alert('Error deleting city');
+                throw new Error('Error deleting city');
             }
+        })
+        .then(data => {
+            fetchCityList(); // Fetch city list after successfully deleting the city
         })
         .catch(error => console.error('Error deleting city:', error));
     }
 }
 
-// Initialize login form
-document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    login();
+// Initialize the app
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if user is already logged in
+    const loggedIn = localStorage.getItem('loggedIn');
+    const username = localStorage.getItem('username');
+
+    if (loggedIn === 'true' && username) {
+        document.getElementById('loggedInUser').textContent = username;
+        document.getElementById('loggedInUserHeader').textContent = `Logged in as ${username}`;
+        fetchCityList();
+        toggleScreen('homeScreen');
+    } else {
+        toggleScreen('loginContainer');
+    }
 });
 
 // Initialize Add City button

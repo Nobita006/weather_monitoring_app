@@ -22,12 +22,16 @@
         </div>
 
         <div id="logoutForm" class="hidden">
-            <h2>Welcome, <span id="loggedInUser"></span>!</h2>
+            <span id="loggedInUser"></span>
             <button onclick="logout()">Logout</button>
         </div>
     </div>
 
     <div id="homeScreen" class="hidden">
+        <div id="header">
+            <span id="loggedInUserHeader"></span>
+            <button id="logoutBtn" onclick="logout()">Logout</button>
+        </div>
         <h1>Welcome to Weather Monitoring App</h1>
         <div id="cityList">
             <!-- City list will be displayed here -->

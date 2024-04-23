@@ -1,21 +1,75 @@
+/* CSS code for styling */
 
-#loginContainer {
-    text-align: center;
-}
-
-/* Hide the home screen initially */
-#homeScreen {
-    display: none;
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 .hidden {
     display: none;
 }
 
+/* Login form styles */
+#loginContainer {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#loginForm {
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+#loginForm input {
+    margin-bottom: 10px;
+}
+
+#loginError {
+    color: red;
+}
+
+/* Home screen styles */
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f2f2f2;
+}
+
+#logoutBtn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#homeScreen {
+    text-align: center;
+    padding: 20px;
+}
+
+#cityList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
 .cityItem {
     border: 1px solid #ccc;
     padding: 10px;
-    margin-bottom: 10px;
+    width: 200px;
 }
 
 .deleteBtn {
