@@ -182,12 +182,69 @@ function showCityDetails(cityName) {
             cityTemperatureElem.textContent = data.temperature;
             cityHumidityElem.textContent = data.humidity;
 
+            // Fetch historical data for the selected city
+            fetch(`http://127.0.0.1:5000/cities/${cityName}/history`)
+                .then(response => response.json())
+                .then(history => {
+                    // Extract timestamps, temperatures, and humidities from historical data
+                    const timestamps = history.map(entry => new Date(entry.timestamp).toLocaleString());
+                    const temperatures = history.map(entry => entry.temperature);
+                    const humidities = history.map(entry => entry.humidity);
+
+                    // Create temperature chart
+                    const temperatureChart = document.getElementById('temperatureChart');
+                    new Chart(temperatureChart, {
+                        type: 'line',
+                        data: {
+                            labels: timestamps,
+                            datasets: [{
+                                label: 'Temperature (°C)',
+                                data: temperatures,
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: false
+                                    }
+                                }]
+                            }
+                        }
+                    });
+
+                    // Create humidity chart
+                    const humidityChart = document.getElementById('humidityChart');
+                    new Chart(humidityChart, {
+                        type: 'line',
+                        data: {
+                            labels: timestamps,
+                            datasets: [{
+                                label: 'Humidity (%)',
+                                data: humidities,
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                })
+                .catch(error => console.error('Error fetching historical data:', error));
+
             // Show popup
             document.getElementById('cityDetailsPopup').classList.remove('hidden');
-
-            // TODO: Fetch and display weather charts
-            // For now, just log the data
-            console.log(data);
         })
         .catch(error => console.error('Error fetching city details:', error));
 }

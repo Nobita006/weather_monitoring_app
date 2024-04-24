@@ -5,3 +5,12 @@ CREATE TABLE IF NOT EXISTS cities (
     humidity REAL,
     last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS city_history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    city_id INTEGER,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    temperature REAL,
+    humidity REAL,
+    FOREIGN KEY (city_id) REFERENCES cities(id)
+);

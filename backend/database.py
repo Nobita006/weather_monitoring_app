@@ -17,7 +17,7 @@ def close_db(e=None):
 # Function to initialize database
 def init_db():
     db = get_db()
-    with open('schema.sql', 'r') as f:
+    with open('backend\schema.sql', 'r') as f:
         db.executescript(f.read())
 
 # Function to insert or update city data into the database
@@ -50,3 +50,10 @@ def get_city_by_name(name):
     cursor = db.execute('''SELECT * FROM cities WHERE name = ?''', (name,))
     city = cursor.fetchone()
     return city
+
+# Function to fetch historical data for a city
+def get_city_history(name):
+    db = get_db()
+    cursor = db.execute('''SELECT timestamp, temperature, humidity FROM city_history WHERE name = ? ORDER BY timestamp ASC''', (name,))
+    history = [dict(row) for row in cursor.fetchall()]
+    return history

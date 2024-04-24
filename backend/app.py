@@ -22,7 +22,7 @@ def update_weather_data():
 
 # Initialize scheduler
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=update_weather_data, trigger="interval", minutes=60)  
+scheduler.add_job(func=update_weather_data, trigger="interval", minutes=1)  
 scheduler.start()
 
 # Login route
@@ -78,6 +78,13 @@ def fetch_weather_data(city_name):
     # Insert or update data into the database
     upsert_city(city_name, temperature, humidity)
 
+    # Get the city ID
+    city = get_city_by_name(city_name)
+    city_id = city['id']
+    
+    # Insert data into city_history table
+    insert_city_history(city_id, temperature, humidity)
+
 # Route to fetch all cities from the database
 @app.route('/cities')
 def cities():
@@ -129,6 +136,30 @@ def city_details(city_name):
         })
     else:
         return jsonify({'error': 'City not found'}), 404
+    
+# Function to insert historical data into the database
+def insert_city_history(city_id, temperature, humidity):
+    db = get_db()
+    db.execute('''INSERT INTO city_history (city_id, temperature, humidity) VALUES (?, ?, ?)''', (city_id, temperature, humidity))
+    db.commit()
+
+# Route to fetch historical data for a specific city
+@app.route('/cities/<city_name>/history')
+def city_history(city_name):
+    city = get_city_by_name(city_name)
+    if city:
+        city_id = city['id']
+        history = get_city_history(city_id)
+        return jsonify(history)
+    else:
+        return jsonify({'error': 'City not found'}), 404
+
+# Function to fetch historical data for a specific city by city_id
+def get_city_history(city_id):
+    db = get_db()
+    cursor = db.execute('''SELECT timestamp, temperature, humidity FROM city_history WHERE city_id = ? ORDER BY timestamp ASC''', (city_id,))
+    history = [dict(row) for row in cursor.fetchall()]
+    return history
 
 if __name__ == '__main__':
     app.run(debug=True)
