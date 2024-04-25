@@ -263,3 +263,41 @@ function showCityDetails(cityName) {
 function hidePopUp() {
     document.getElementById('cityDetailsPopup').classList.add('hidden');
 }
+
+var map = L.map('map').setView([0, 0], 2); // Set initial view and zoom level
+
+// Add tile layer (you can choose different map providers)
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+fetch('http://127.0.0.1:5000/cities') 
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(city => {
+            // Fetch latitude and longitude for each city using Geocoding API
+            fetch(`https://api.api-ninjas.com/v1/geocoding?city=${city.name}`, {
+                headers: { 'X-Api-Key': '/RadM/mLFGB7/cc85mj+oQ==pMfQPHvH2qTPqHUg' }
+            })
+            .then(response => response.json())
+            .then(geoData => {
+                // Check if API returned valid data
+                if (geoData.length > 0) {
+                    const { latitude, longitude } = geoData[0];
+                    // Add marker to map using fetched latitude and longitude
+                    L.marker([latitude, longitude]).addTo(map)
+                        .bindPopup(`<b>${city.name}</b><br>Temperature: ${city.temperature}°C<br>Humidity: ${city.humidity}%`)
+                        .on('mouseover', function(e) {
+                            this.openPopup();
+                        })
+                        .on('mouseout', function(e) {
+                            this.closePopup();
+                        });
+                } else {
+                    console.error(`Failed to fetch coordinates for city: ${city.name}`);
+                }
+            })
+            .catch(error => console.error('Error fetching city coordinates:', error));
+        });
+    })
+    .catch(error => console.error('Error fetching city data:', error));
