@@ -1,6 +1,6 @@
 ## Screenshot - Login Screen
 
-![image](https://github.com/Nobita006/weather_monitoring_app/assets/110232335/324274ad-0ec7-4e37-b49f-95d53419de07)
+![image](https://github.com/Nobita006/weather_monitoring_app/assets/110232335/89fa883e-1374-4c04-b752-30c0eb67cc69)
 
 
 ## Screenshot - Home Screen
