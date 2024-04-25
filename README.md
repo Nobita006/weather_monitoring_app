@@ -1,4 +1,4 @@
-# Live Site - https://nobita006.github.io/weather_monitoring_app/
+Live Website - https://nobita006.github.io/weather_monitoring_app/
 
 ## Screenshot - Login Screen
 
@@ -68,7 +68,7 @@ To run this application, you need to have the following installed:
 4. Install the required dependencies using `pip install -r requirements.txt`.
 5. Run the backend server by executing `python app.py`.
 6. Open `index.html` in your web browser to access the frontend.
-7. If weather_data.db is deleted accidentally run initializeDb.py to recreate Database.
+7. If `weather_data.db` is deleted accidentally run `initializeDb.py` to recreate Database.
 
 ## API Used
 
