@@ -25,6 +25,77 @@ body {
     margin-bottom: 10px;
 }
 
+/* Container styles */
+#loginContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+}
+
+/* Login form styles */
+#loginForm {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+/* Adjust the width of form#loginForm */
+form#loginForm {
+    width: calc(100% - 40px); /* Subtracting the total horizontal padding (20px on each side) */
+}
+
+/* Input field styles */
+#loginForm input {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+/* Login button styles */
+#loginForm button {
+    width: 80%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Login button hover effect */
+#loginForm button:hover {
+    background-color: #0056b3;
+}
+
+/* Error message styles */
+#loginError {
+    color: red;
+    margin-top: 10px;
+}
+
+/* Title styles */
+#loginContainer h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form container styles */
+#loginForm {
+    width: 500px;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    #loginForm {
+        width: 80%;
+    }
+}
+
 #loginError {
     color: red;
 }
