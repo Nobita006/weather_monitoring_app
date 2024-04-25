@@ -20,6 +20,7 @@ Live Website - https://nobita006.github.io/weather_monitoring_app/
 # Weather Monitoring Application
 
 This is a simple web-based weather monitoring application that allows users to log in, add cities to monitor weather conditions, view historical trends, and delete cities from the monitoring list. The application utilizes a free/open weather API to access weather data for cities across the globe.
+Backend is hosted on Render and Frontend is hosted on Github Pages.
 
 ## Features
 
@@ -78,11 +79,11 @@ To run this application, you need to have the following installed:
 ## Usage
 
 1. Log in using your username and password. 
-```
-username = user1    password = password1
+    ```
+    username = user1    password = password1
 
-username = user2    password = password2
-```
+    username = user2    password = password2
+    ```
 2. On the home screen, you can view a list of cities you are tracking, along with their current weather information.
 3. Click on "Add City" to search for and add new cities to monitor.
 4. Click on an existing city to view its detailed weather information and historical trends.
