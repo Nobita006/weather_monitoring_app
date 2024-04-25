@@ -161,5 +161,18 @@ def get_city_history(city_id):
     history = [dict(row) for row in cursor.fetchall()]
     return history
 
+# Route to clean the city_history table
+@app.route('/clean_history', methods=['POST'])
+def clean_history():
+    try:
+        # Perform the database operation to delete all records from the city_history table
+        db = get_db()
+        db.execute('DELETE FROM city_history')
+        db.commit()
+        
+        return jsonify({'message': 'City history cleaned successfully'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 if __name__ == '__main__':
     app.run(debug=False)
