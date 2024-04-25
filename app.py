@@ -23,7 +23,7 @@ def update_weather_data():
 
 # Initialize scheduler
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=update_weather_data, trigger="interval", minutes=10)  
+scheduler.add_job(func=update_weather_data, trigger="interval", minutes=5)  
 scheduler.start()
 
 # Login route
@@ -162,21 +162,21 @@ def get_city_history(city_id):
     history = [dict(row) for row in cursor.fetchall()]
     return history
 
-# Route to clean the city_history table
-@app.route('/clean_history', methods=['POST'])
-def clean_history():
-    try:
-        # Perform the database operation to delete all records from the city_history table
-        db = get_db()
-        db.execute('DELETE FROM city_history')
-        db.commit()
+# # Route to clean the city_history table
+# @app.route('/clean_history', methods=['POST'])
+# def clean_history():
+#     try:
+#         # Perform the database operation to delete all records from the city_history table
+#         db = get_db()
+#         db.execute('DELETE FROM city_history')
+#         db.commit()
         
-        return jsonify({'message': 'City history cleaned successfully'}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+#         return jsonify({'message': 'City history cleaned successfully'}), 200
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 500
 
 # Define port
-port = int(os.environ.get("PORT", 8000))
+port = int(os.environ.get("PORT", 5000))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=port)

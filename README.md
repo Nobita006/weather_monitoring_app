@@ -1,3 +1,5 @@
+# Live Site - https://nobita006.github.io/weather_monitoring_app/
+
 ## Screenshot - Login Screen
 
 ![image](https://github.com/Nobita006/weather_monitoring_app/assets/110232335/89fa883e-1374-4c04-b752-30c0eb67cc69)
@@ -56,7 +58,7 @@ To run this application, you need to have the following installed:
 
 1. Clone this repository to your local machine.
 2. Navigate to the project directory.
-3. Initialize a Virtual Environment (Optional)
+3. Initialize a Virtual Environment
     ```
     python3 -m venv env
     source env/bin/activate  # For Linux/Mac

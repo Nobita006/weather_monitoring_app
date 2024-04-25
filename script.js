@@ -1,11 +1,13 @@
-//const backendBaseUrl = 'https://weather-monitoring-app.onrender.com/'; //not working for some reason
+// Define the base URL for the backend
+const backendBaseUrl = 'https://weather-monitoring-app.onrender.com/'; 
+// const backendBaseUrl = 'http://127.0.0.1:5000/';  // Use this to run locally
 
 // Function to perform user login
 function login() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    fetch('https://weather-monitoring-app.onrender.com/login', {
+    fetch(`${backendBaseUrl}login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -38,7 +40,7 @@ function login() {
 
 // Function to handle user logout
 function logout() {
-    fetch('https://weather-monitoring-app.onrender.com/logout')
+    fetch(`${backendBaseUrl}logout`)
     .then(response => {
         if (response.ok) {
             // Update UI and clear login state from local storage
@@ -56,7 +58,7 @@ function logout() {
 
 // Function to fetch city list from backend API
 function fetchCityList() {
-    fetch('https://weather-monitoring-app.onrender.com/cities') 
+    fetch(`${backendBaseUrl}cities`) 
         .then(response => response.json())
         .then(data => {
             const cityListDiv = document.getElementById('cityList');
@@ -99,7 +101,7 @@ function getTemperatureIcon(temperature) {
 
 // Function to add a city
 function addCity(cityName) {
-    fetch('https://weather-monitoring-app.onrender.com/cities/add', {
+    fetch(`${backendBaseUrl}cities/add`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -126,7 +128,7 @@ function addCity(cityName) {
 // Function to delete a city
 function deleteCity(cityName) {
     if (confirm(`Are you sure you want to delete ${cityName}?`)) {
-        fetch(`https://weather-monitoring-app.onrender.com/cities/delete/${cityName}`, {
+        fetch(`${backendBaseUrl}cities/delete/${cityName}`, {
             method: 'DELETE'
         })
         .then(response => {
@@ -174,7 +176,7 @@ document.getElementById('addCityBtn').addEventListener('click', () => {
 
 // Function to show city details popup
 function showCityDetails(cityName) {
-    fetch(`https://weather-monitoring-app.onrender.com/cities/${cityName}`)
+    fetch(`${backendBaseUrl}cities/${cityName}`)
         .then(response => response.json())
         .then(data => {
             const cityNameElem = document.getElementById('cityName');
@@ -186,7 +188,7 @@ function showCityDetails(cityName) {
             cityHumidityElem.textContent = data.humidity;
 
             // Fetch historical data for the selected city
-            fetch(`https://weather-monitoring-app.onrender.com/cities/${cityName}/history`)
+            fetch(`${backendBaseUrl}cities/${cityName}/history`)
                 .then(response => response.json())
                 .then(history => {
                     // Extract timestamps, temperatures, and humidities from historical data
@@ -274,7 +276,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-fetch('https://weather-monitoring-app.onrender.com/cities') 
+fetch(`${backendBaseUrl}cities`) 
     .then(response => response.json())
     .then(data => {
         data.forEach(city => {
