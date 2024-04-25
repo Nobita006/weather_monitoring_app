@@ -56,8 +56,8 @@ To run this application, you need to have the following installed:
 
 1. Clone this repository to your local machine.
 2. Navigate to the project directory.
-3. Install the required dependencies using `pip install -r backend/requirements.txt`.
-4. Run the backend server by executing `python app.py` in the `backend` directory.
+3. Install the required dependencies using `pip install -r requirements.txt`.
+4. Run the backend server by executing `python app.py` or running `flask --app app --debug run`.
 5. Open `index.html` in your web browser to access the frontend.
 
 ## API Used
