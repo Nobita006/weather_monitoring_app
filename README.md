@@ -1,3 +1,18 @@
+## Screenshot - Login Screen
+
+![image](https://github.com/Nobita006/weather_monitoring_app/assets/110232335/89fa883e-1374-4c04-b752-30c0eb67cc69)
+
+
+## Screenshot - Home Screen
+
+![image](https://github.com/Nobita006/weather_monitoring_app/assets/110232335/a15e305e-b81a-4074-b95f-bc3249e6fd7e)
+
+
+## Screenshot - PopUp Screen
+
+![image](https://github.com/Nobita006/weather_monitoring_app/assets/110232335/4cb4a05d-9d2d-4dd3-9578-b74f135ce3ab)
+
+
 ---
 
 # Weather Monitoring Application
