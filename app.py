@@ -3,6 +3,7 @@ from flask import Flask, request, session, jsonify
 from database import *
 from flask_cors import CORS
 from apscheduler.schedulers.background import BackgroundScheduler
+import os
 
 app = Flask(__name__)
 # Enable CORS for all routes
@@ -174,5 +175,8 @@ def clean_history():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-if __name__ == '__main__':
-    app.run(debug=False)
+# Define port
+port = int(os.environ.get("PORT", 8000))
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=port)
