@@ -56,9 +56,16 @@ To run this application, you need to have the following installed:
 
 1. Clone this repository to your local machine.
 2. Navigate to the project directory.
-3. Install the required dependencies using `pip install -r requirements.txt`.
-4. Run the backend server by executing `python app.py`.
-5. Open `index.html` in your web browser to access the frontend.
+3. Initialize a Virtual Environment (Optional)
+    ```
+    python3 -m venv env
+    source env/bin/activate  # For Linux/Mac
+    # Or, env\Scripts\activate  # For Windows
+
+    ```
+4. Install the required dependencies using `pip install -r requirements.txt`.
+5. Run the backend server by executing `python app.py`.
+6. Open `index.html` in your web browser to access the frontend.
 
 ## API Used
 
