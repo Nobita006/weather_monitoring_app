@@ -22,7 +22,7 @@ def update_weather_data():
 
 # Initialize scheduler
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=update_weather_data, trigger="interval", minutes=1)  
+scheduler.add_job(func=update_weather_data, trigger="interval", minutes=10)  
 scheduler.start()
 
 # Login route

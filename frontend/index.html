@@ -42,11 +42,12 @@
     </div>
 
     <div id="cityDetailsPopup" class="hidden">
+        <div id="closePopup" onclick="hidePopUp()">&#10006;</div>
         <div id="cityDetailsContent">
             <h2 id="cityName"></h2>
             <p>Temperature: <span id="cityTemperature"></span>°C</p>
             <p>Humidity: <span id="cityHumidity"></span>%</p>
-            <button id="deleteCityBtn" onclick="deleteCityDetails()">Delete</button>
+            <button id="deleteCityBtn" onclick="deleteCity(document.getElementById('cityName').textContent)">Delete</button>
             <div id="weatherCharts">
                 <canvas id="temperatureChart"></canvas>
                 <canvas id="humidityChart"></canvas>

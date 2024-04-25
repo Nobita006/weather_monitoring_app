@@ -209,8 +209,13 @@ function showCityDetails(cityName) {
                             scales: {
                                 yAxes: [{
                                     ticks: {
-                                        beginAtZero: false
+                                        beginAtZero: true
                                     }
+                                }],
+                                xAxes: [{
+                                    ticks:{
+                                        display: false // Hides only the labels of the x-axis 
+                                    }  
                                 }]
                             }
                         }
@@ -236,6 +241,11 @@ function showCityDetails(cityName) {
                                     ticks: {
                                         beginAtZero: true
                                     }
+                                }],
+                                xAxes: [{
+                                    ticks:{
+                                        display: false // Hides only the labels of the x-axis 
+                                    }  
                                 }]
                             }
                         }
@@ -249,7 +259,7 @@ function showCityDetails(cityName) {
         .catch(error => console.error('Error fetching city details:', error));
 }
 
-// Function to delete city details popup
-function deleteCityDetails() {
+// Function to hide popup
+function hidePopUp() {
     document.getElementById('cityDetailsPopup').classList.add('hidden');
 }

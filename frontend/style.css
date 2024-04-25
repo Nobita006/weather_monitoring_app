@@ -70,6 +70,12 @@ body {
     border: 1px solid #ccc;
     padding: 10px;
     width: 200px;
+    cursor: pointer; /* Add cursor pointer for clickable effect */
+}
+
+.cityName {
+    font-weight: bold; /* Make city name bold */
+    text-transform: capitalize; /* Capitalize the first letter of each word */
 }
 
 .deleteBtn {
@@ -82,4 +88,85 @@ body {
 
 .deleteBtn:hover {
     background-color: #cc4c39;
+}
+
+/* City details popup styles */
+#cityDetailsPopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%; /* Set the width to 80% of the viewport width */
+    max-width: 900px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#cityDetailsContent {
+    text-align: center;
+}
+
+#cityDetailsContent h2 {
+    margin-bottom: 10px;
+}
+
+#cityDetailsContent p {
+    margin-bottom: 5px;
+}
+
+#deleteCityBtn {
+    background-color: #ff6347;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px
+}
+
+#deleteCityBtn:hover {
+    background-color: #cc4c39;
+}
+
+#weatherCharts {
+    display: flex;
+    flex-direction: column; /* Display charts in a column */
+    align-items: center; /* Center align the charts */
+    margin-top: 20px;
+}
+
+/* Chart styles */
+canvas {
+    width: 90%;
+    max-width: 700px; /* Set a maximum width for the charts */
+    height: auto;
+}
+
+#closePopup {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Add City Button styles */
+#addCityBtn {
+    margin-top: 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#addCityBtn:hover {
+    background-color: #45a049;
 }
