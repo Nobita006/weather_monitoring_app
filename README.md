@@ -16,7 +16,7 @@ This is a simple web-based weather monitoring application that allows users to l
 
 ### Frontend
 - HTML/CSS/JavaScript
-- Leaflet.js for interactive maps
+- Leaflet.js for interactive map
 - Chart.js for data visualization
 
 ### Backend
@@ -30,8 +30,9 @@ This is a simple web-based weather monitoring application that allows users to l
 
 To run this application, you need to have the following installed:
 
-- Python 3.x
+- Python 3
 - Flask (`pip install Flask`)
+- flask_cors (`pip install flask_cors`)
 - APScheduler (`pip install apscheduler`)
 - Requests (`pip install requests`)
 - SQLite3 (usually comes pre-installed with Python)
@@ -40,21 +41,22 @@ To run this application, you need to have the following installed:
 
 1. Clone this repository to your local machine.
 2. Navigate to the project directory.
-3. Install the required dependencies using `pip install -r requirements.txt`.
+3. Install the required dependencies using `pip install -r backend/requirements.txt`.
 4. Run the backend server by executing `python app.py` in the `backend` directory.
 5. Open `index.html` in your web browser to access the frontend.
 
 ## API Used
 
-- WeatherAPI (http://api.weatherapi.com/v1) - Used to fetch real-time weather data for cities.
-- Geocoding API - Used to convert city name to latitude and longitude coordinates.
+- WeatherAPI (https://www.weatherapi.com/) - Used to fetch real-time weather data for cities.
+- Geocoding API (https://api-ninjas.com/api/geocoding) - Used to convert city name to latitude and longitude coordinates.
 
 ## Usage
 
 1. Log in using your username and password. 
 ```
-username = user1        password = password1
-username = user2        password = password2
+username = user1    password = password1
+
+username = user2    password = password2
 ```
 2. On the home screen, you can view a list of cities you are tracking, along with their current weather information.
 3. Click on "Add City" to search for and add new cities to monitor.

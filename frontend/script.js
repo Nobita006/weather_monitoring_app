@@ -1,5 +1,3 @@
-// JavaScript code for frontend functionality
-
 // Function to perform user login
 function login() {
     const username = document.getElementById('username').value;
@@ -23,6 +21,7 @@ function login() {
         // Update UI and store login state in local storage
         document.getElementById('loginContainer').style.display = 'none';
         document.getElementById('homeScreen').style.display = 'block';
+        document.getElementById('mapContainer').style.display = 'inherit';
         document.getElementById('loggedInUser').textContent = username;
         document.getElementById('loggedInUserHeader').textContent = `Logged in as ${username}`;
         localStorage.setItem('loggedIn', 'true');
@@ -43,6 +42,7 @@ function logout() {
             // Update UI and clear login state from local storage
             document.getElementById('loginContainer').style.display = 'block';
             document.getElementById('homeScreen').style.display = 'none';
+            document.getElementById('mapContainer').style.display = 'none';
             localStorage.removeItem('loggedIn');
             localStorage.removeItem('username');
         } else {
@@ -158,6 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show login form if user is not logged in
         document.getElementById('loginContainer').style.display = 'block';
         document.getElementById('homeScreen').style.display = 'none';
+        document.getElementById('mapContainer').style.display = 'none';
     }
 });
 
