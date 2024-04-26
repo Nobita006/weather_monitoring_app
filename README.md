@@ -1,3 +1,10 @@
+---
+
+# Weather Monitoring Application
+
+This is a simple web-based weather monitoring application that allows users to log in, add cities to monitor weather conditions, view historical trends, and delete cities from the monitoring list. The application utilizes a free/open weather API to access weather data for cities across the globe.
+Backend is hosted on Render and Frontend is hosted on Github Pages.
+
 Live Website - https://nobita006.github.io/weather_monitoring_app/
 
 ## Screenshot - Login Screen
@@ -14,13 +21,6 @@ Live Website - https://nobita006.github.io/weather_monitoring_app/
 
 ![image](https://github.com/Nobita006/weather_monitoring_app/assets/110232335/4cb4a05d-9d2d-4dd3-9578-b74f135ce3ab)
 
-
----
-
-# Weather Monitoring Application
-
-This is a simple web-based weather monitoring application that allows users to log in, add cities to monitor weather conditions, view historical trends, and delete cities from the monitoring list. The application utilizes a free/open weather API to access weather data for cities across the globe.
-Backend is hosted on Render and Frontend is hosted on Github Pages.
 
 ## Features
 
