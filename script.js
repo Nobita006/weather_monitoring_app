@@ -1,6 +1,6 @@
 // Define the base URL for the backend
-// const backendBaseUrl = 'https://weather-monitoring-app.onrender.com/'; 
-const backendBaseUrl = 'http://127.0.0.1:5000/';  // Use this to run locally
+const backendBaseUrl = 'https://weather-monitoring-app.onrender.com/'; 
+// const backendBaseUrl = 'http://127.0.0.1:5000/';  // Use this to run locally
 
 // Function to perform user login
 function login() {
