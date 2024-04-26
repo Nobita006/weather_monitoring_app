@@ -9,13 +9,14 @@ app = Flask(__name__)
 # Enable CORS for all routes
 CORS(app)
 app.teardown_appcontext(close_db)
-app.secret_key = 'sayan@das'
+app.secret_key = 'sayandas'
 
 # Hardcoded user credentials (for demonstration purposes)
 users = {'user1': 'password1', 'user2': 'password2'}
 
 # Function to update weather data for all cities in the database
 def update_weather_data():
+    print("Weather Updated")
     with app.app_context():  # Ensure to work within the application context
         cities = get_cities()
         for city in cities:
@@ -25,6 +26,10 @@ def update_weather_data():
 scheduler = BackgroundScheduler()
 scheduler.add_job(func=update_weather_data, trigger="interval", minutes=5)  
 scheduler.start()
+
+@app.route('/')
+def welcome():
+    return 'Welcome to the backend of Weather Monitoring App'
 
 # Login route
 @app.route('/login', methods=['POST'])
@@ -162,6 +167,8 @@ def get_city_history(city_id):
     history = [dict(row) for row in cursor.fetchall()]
     return history
 
+update_weather_data()
+
 # # Route to clean the city_history table
 # @app.route('/clean_history', methods=['POST'])
 # def clean_history():
@@ -178,5 +185,10 @@ def get_city_history(city_id):
 # Define port
 port = int(os.environ.get("PORT", 5000))
 
+# # May use this to run locally
+# if __name__ == '__main__':
+#     app.run(debug=True)
+
+# For Hosting 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=True)
