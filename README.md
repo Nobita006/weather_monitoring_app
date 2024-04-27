@@ -11,6 +11,7 @@ Live Website - https://nobita006.github.io/weather_monitoring_app/
 
 https://github.com/Nobita006/weather_monitoring_app/assets/110232335/d5875905-b813-4f07-9bf2-4ad54d924758
 
+
 ## Features
 
 - User authentication: Users can log in using a username and password.
