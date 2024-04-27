@@ -7,7 +7,6 @@ Backend is hosted on Render and Frontend is hosted on Github Pages.
 
 Live Website - https://nobita006.github.io/weather_monitoring_app/
 
-
 ## Screen Recording
 
 
