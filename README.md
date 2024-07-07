@@ -7,7 +7,7 @@ Backend is hosted on Render and Frontend is hosted on Github Pages.
 
 Live Website - https://nobita006.github.io/weather_monitoring_app/
 
-Log in using your username and password. 
+Log in using this username and password. 
 
     username = user1    password = password1
     username = user2    password = password2
